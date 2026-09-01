@@ -1,20 +1,20 @@
 const releases = [
   {
-    artist: "Sparrow B",
-    song: "Four Twenty",
-    link: "https://youtube.com/",
+    artist: "Sparrow B Official",
+    song: "Against the World",
+    link: "https://youtu.be/BrOLo4fq6F8?si=FYPD74WnjopqBpq9",
     type: "Latest Release"
   },
   {
-    artist: "SautiHub Artist",
-    song: "New Sound",
-    link: "https://youtube.com/",
+    artist: "Sparrow B Official",
+    song: "Hustle",
+    link: "https://youtu.be/2pjDKIEWirg?si=W4BaxnSdF-0_s8aJ",
     type: "Featured"
   },
   {
-    artist: "Upcoming Artist",
-    song: "Coming Soon",
-    link: "https://youtube.com/",
+    artist: "YB G-nazo",
+    song: "Never Easy",
+    link: "https://youtu.be/arnrBYubLnM?si=Gq-pobvYCKkdc8gL",
     type: "New Release"
   }
 ];
