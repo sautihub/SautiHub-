@@ -1,4 +1,54 @@
-let selectedPackage = null;
+const releases = [
+  {
+    artist: "Sparrow B",
+    song: "Four Twenty",
+    link: "https://youtube.com/",
+    type: "Latest Release"
+  },
+  {
+    artist: "SautiHub Artist",
+    song: "New Sound",
+    link: "https://youtube.com/",
+    type: "Featured"
+  },
+  {
+    artist: "Upcoming Artist",
+    song: "Coming Soon",
+    link: "https://youtube.com/",
+    type: "New Release"
+  }
+];
+
+function displayReleases(list = releases) {
+  const container = document.getElementById("releases");
+
+  container.innerHTML = list.map(release => `
+    <article class="release-card">
+      <div class="release-cover">♪</div>
+      <div class="release-info">
+        <small>${release.type}</small>
+        <h3>${release.song}</h3>
+        <p>${release.artist}</p>
+        <a href="${release.link}" target="_blank" rel="noopener">
+          Listen Now →
+        </a>
+      </div>
+    </article>
+  `).join("");
+}
+
+displayReleases();
+
+document.getElementById("search").addEventListener("input", function () {
+  const query = this.value.toLowerCase();
+
+  const filtered = releases.filter(release =>
+    release.artist.toLowerCase().includes(query) ||
+    release.song.toLowerCase().includes(query)
+  );
+
+  displayReleases(filtered);
+});let selectedPackage = null;
 
 function choose(amount, name) {
   selectedPackage = { amount, name };
