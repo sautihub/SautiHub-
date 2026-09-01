@@ -96,3 +96,4 @@ document.getElementById("orderForm").addEventListener("submit", function(e) {
   document.getElementById("status").textContent =
     "Opening WhatsApp...";
 });
+                                                      
