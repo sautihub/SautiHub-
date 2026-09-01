@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SautiHub — African Music Promotion</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="#home"><span>♪</span> SautiHub</a>
+  <nav>
+    <a href="#music">Discover</a><a href="#promote">Promote</a><a href="#pricing">Pricing</a><a href="#about">About</a>
+  </nav>
+  <a class="btn small" href="#submit">Submit Music</a>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">KENYA • AFRICA • MUSIC</p>
+    <h1>Get your sound<br><em>heard.</em></h1>
+    <p class="lead">SautiHub helps independent artists put their music in front of new listeners through affordable digital promotion.</p>
+    <div class="actions"><a class="btn" href="#submit">Promote my music</a><a class="ghost" href="#music">Explore artists →</a></div>
+    <div class="stats"><div><b>100%</b><span>Artist focused</span></div><div><b>24/7</b><span>Submissions</span></div><div><b>254+</b><span>Made for Kenya</span></div></div>
+  </div>
+  <div class="hero-card">
+    <div class="vinyl"><span>SAUTI<br>HUB</span></div>
+    <p>FEATURED RELEASE</p><h3>New sounds. New voices.</h3><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+</section>
+
+<section id="music" class="section">
+  <div class="section-head"><div><p class="eyebrow">DISCOVER</p><h2>Latest releases</h2></div><input id="search" placeholder="Search artists or songs…"></div>
+  <div id="releases" class="grid"></div>
+</section>
+
+<section id="promote" class="section dark">
+  <p class="eyebrow">WHY SAUTIHUB</p><h2>Built for independent artists.</h2>
+  <div class="features"><article><b>01</b><h3>Get discovered</h3><p>Put your release in front of people actively looking for fresh music.</p></article>
+  <article><b>02</b><h3>Simple promotion</h3><p>Choose a package, submit your details and pay securely through M-Pesa.</p></article>
+  <article><b>03</b><h3>Build your profile</h3><p>Create a recognizable artist presence with your music and social links.</p></article></div>
+</section>
+
+<section id="pricing" class="section">
+<p class="eyebrow">PROMOTION PACKAGES</p><h2>Pick your boost.</h2>
+<div class="pricing">
+  <article class="price"><span>STARTER</span><h3>KSh 100</h3><p>1 promotional post</p><ul><li>Artist + song details</li><li>Social link</li><li>Basic placement</li></ul><button onclick="choose(100,'Starter')">Choose Starter</button></article>
+  <article class="price featured"><label>POPULAR</label><span>BOOST</span><h3>KSh 250</h3><p>Featured promotion</p><ul><li>Everything in Starter</li><li>Featured placement</li><li>7-day visibility</li></ul><button onclick="choose(250,'Boost')">Choose Boost</button></article>
+  <article class="price"><span>PREMIUM</span><h3>KSh 500</h3><p>Maximum visibility</p><ul><li>Everything in Boost</li><li>Premium placement</li><li>Priority review</li></ul><button onclick="choose(500,'Premium')">Choose Premium</button></article>
+</div>
+</section>
+
+<section id="submit" class="section form-section">
+<div><p class="eyebrow">SUBMIT YOUR RELEASE</p><h2>Put your music on SautiHub.</h2><p>Fill in the form. The payment step below is a demo until your Daraja credentials are connected.</p></div>
+<form id="orderForm">
+<label>Artist name<input id="artist" required placeholder="e.g. Sparrow B"></label>
+<label>Song title<input id="song" required placeholder="e.g. Four Twenty"></label>
+<label>Music link<input id="link" type="url" required placeholder="https://youtube.com/..."></label>
+<label>M-Pesa phone<input id="phone" required placeholder="07XXXXXXXX"></label>
+<label>Package<select id="package"><option value="100">Starter — KSh 100</option><option value="250">Boost — KSh 250</option><option value="500">Premium — KSh 500</option></select></label>
+<button class="btn" type="submit">Request M-Pesa STK Push</button>
+<p id="status" class="status"></p>
+</form>
+</section>
+
+<section id="about" class="section about"><p class="eyebrow">ABOUT</p><h2>A home for the next wave.</h2><p>SautiHub is designed as a lightweight music discovery and artist-promotion platform for Kenya and, eventually, the wider African market.</p></section>
+</main>
+<footer><span>© 2026 SautiHub</span><span>Independent artists. African sounds.</span></footer>
+<script src="app.js"></script>
+</body></html>
