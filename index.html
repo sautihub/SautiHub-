@@ -67,5 +67,46 @@
 <section id="about" class="section about"><p class="eyebrow">ABOUT</p><h2>A home for the next wave.</h2><p>SautiHub is designed as a lightweight music discovery and artist-promotion platform for Kenya and, eventually, the wider African market.</p></section>
 </main>
 <footer><span>© 2026 SautiHub</span><span>Independent artists. African sounds.</span></footer>
-<script src="app.js"></script>
+<script src="app.js"></script><section class="payment-section" id="payment">
+  <div class="payment-card">
+    <h2>Complete Your Payment</h2>
+    <p>Choose your preferred payment method to promote your music.</p>
+
+    <div class="selected-package">
+      <span>Selected Package</span>
+      <strong id="selectedPackage">No package selected</strong>
+      <span id="selectedAmount">KSh 0</span>
+    </div>
+
+    <label for="phone">Phone Number</label>
+    <input
+      type="tel"
+      id="phone"
+      placeholder="07XXXXXXXX or 01XXXXXXXX"
+      maxlength="12"
+    />
+
+    <h3>Choose Payment Method</h3>
+
+    <div class="payment-methods">
+      <button type="button" onclick="selectPayment('mpesa')">
+        🟢 M-Pesa
+      </button>
+
+      <button type="button" onclick="selectPayment('airtel')">
+        🔴 Airtel Money
+      </button>
+    </div>
+
+    <button
+      type="button"
+      class="pay-button"
+      onclick="startPayment()"
+    >
+      Continue to Payment
+    </button>
+
+    <p id="paymentMessage"></p>
+  </div>
+</section>
 </body></html>
