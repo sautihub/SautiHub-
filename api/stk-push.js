@@ -9,12 +9,12 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { phone, amount, reference, description } = req.body;
+    const { phone, amount, reference } = req.body;
 
-    if (!phone || !amount || !reference || !description) {
+    if (!phone || !amount || !reference) {
       return res.status(400).json({
         success: false,
-        message: "Phone, amount, reference and description are required."
+        message: "Phone, amount and reference are required."
       });
     }
 
@@ -22,11 +22,15 @@ module.exports = async (req, res) => {
       .replace(/\s+/g, "")
       .replace(/^0/, "254");
 
+    // NeptunePay allows a maximum of 12 characters
+    const shortReference = String(reference)
+      .replace(/\s+/g, "")
+      .slice(0, 12);
+
     const body = {
       phone: normalizedPhone,
       amount: Number(amount),
-      reference: String(reference),
-      description: String(description)
+      reference: shortReference
     };
 
     const timestamp = Math.floor(Date.now() / 1000).toString();
@@ -56,6 +60,7 @@ module.exports = async (req, res) => {
     console.log("NEPTUNE RESPONSE:", data);
 
     return res.status(response.status).json(data);
+
   } catch (error) {
     console.error("STK PUSH ERROR:", error);
 
