@@ -48,12 +48,15 @@ document.getElementById("search").addEventListener("input", function () {
   );
 
   displayReleases(filtered);
-});let selectedPackage = null;
+});
+
+let selectedPackage = null;
 
 function choose(amount, name) {
   selectedPackage = { amount, name };
 
   document.getElementById("package").value = amount;
+
   document.getElementById("status").textContent =
     `${name} package selected — KSh ${amount}`;
 
@@ -62,8 +65,11 @@ function choose(amount, name) {
   });
 }
 
-document.getElementById("orderForm").addEventListener("submit", function(e) {
+document.getElementById("orderForm").addEventListener("submit", async function (e) {
   e.preventDefault();
+
+  const status = document.getElementById("status");
+  const submitButton = document.getElementById("submit");
 
   const artist = document.getElementById("artist").value.trim();
   const song = document.getElementById("song").value.trim();
@@ -71,29 +77,80 @@ document.getElementById("orderForm").addEventListener("submit", function(e) {
   const phone = document.getElementById("phone").value.trim();
   const packageAmount = document.getElementById("package").value;
 
-  if (!artist || !song || !link || !phone) {
-    document.getElementById("status").textContent =
+  if (!artist || !song || !link || !phone || !packageAmount) {
+    status.textContent =
       "Please fill in all the required fields.";
     return;
   }
 
-  const message =
-    `Hello SautiHub 👋%0A%0A` +
-    `I want to promote my music.%0A%0A` +
-    `Artist: ${encodeURIComponent(artist)}%0A` +
-    `Song: ${encodeURIComponent(song)}%0A` +
-    `Music link: ${encodeURIComponent(link)}%0A` +
-    `M-Pesa phone: ${encodeURIComponent(phone)}%0A` +
-    `Package: KSh ${packageAmount}`;
+  // Convert Kenyan phone number to 254 format
+  let formattedPhone = phone.replace(/\s+/g, "");
 
-  const whatsappNumber = "254798346938";
+  if (formattedPhone.startsWith("0")) {
+    formattedPhone = "254" + formattedPhone.substring(1);
+  }
 
-  window.open(
-    `https://wa.me/${whatsappNumber}?text=${message}`,
-    "_blank"
-  );
+  if (formattedPhone.startsWith("+254")) {
+    formattedPhone = formattedPhone.substring(1);
+  }
 
-  document.getElementById("status").textContent =
-    "Opening WhatsApp...";
+  if (!/^2547\d{8}$/.test(formattedPhone)) {
+    status.textContent =
+      "Please enter a valid Kenyan M-Pesa number.";
+    return;
+  }
+
+  const amount = Number(packageAmount);
+
+  if (!amount || amount < 1) {
+    status.textContent =
+      "Please select a valid promotion package.";
+    return;
+  }
+
+  // Prevent double payment requests
+  submitButton.disabled = true;
+  submitButton.textContent = "Sending STK Push...";
+
+  status.textContent =
+    "Sending M-Pesa payment request...";
+
+  try {
+    const response = await fetch("/api/stk-push", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        phone: formattedPhone,
+        amount: amount,
+        reference: `SAUTIHUB-${Date.now()}`,
+        description: `${artist} - ${song} promotion`
+      })
+    });
+
+    const data = await response.json();
+
+    console.log("NeptunePay response:", data);
+
+    if (!response.ok) {
+      throw new Error(
+        data.message ||
+        data.error ||
+        "Unable to start M-Pesa payment."
+      );
+    }
+
+    status.textContent =
+      "✅ STK Push sent! Check your phone and enter your M-Pesa PIN.";
+
+  } catch (error) {
+    console.error("Payment error:", error);
+
+    status.textContent =
+      "❌ " + (error.message || "Payment request failed. Please try again.");
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "Pay Now";
+  }
 });
-                                                      
