@@ -2,7 +2,10 @@ const crypto = require("crypto");
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
-    return res.status(405).json({ success: false, message: "Method not allowed" });
+    return res.status(405).json({
+      success: false,
+      message: "Method not allowed"
+    });
   }
 
   try {
@@ -49,9 +52,12 @@ module.exports = async (req, res) => {
 
     const data = await response.json();
 
+    console.log("NEPTUNE STATUS:", response.status);
+    console.log("NEPTUNE RESPONSE:", data);
+
     return res.status(response.status).json(data);
   } catch (error) {
-    console.error(error);
+    console.error("STK PUSH ERROR:", error);
 
     return res.status(500).json({
       success: false,
@@ -59,4 +65,3 @@ module.exports = async (req, res) => {
     });
   }
 };
-
